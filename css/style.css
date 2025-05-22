@@ -1,7 +1,6 @@
-/********** Template CSS **********/
 :root {
-    --primary: #348E38;
-    --secondary: #525368;
+    --primary: #E53935;
+    --secondary: #FDD835;
     --light: #E8F5E9;
     --dark: #0F4229;
 }
@@ -157,6 +156,10 @@ h6,
 
 
 /*** Header ***/
+#title {
+    text-transform: uppercase;
+}
+
 .carousel-caption {
     top: 0;
     left: 0;
@@ -166,7 +169,6 @@ h6,
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: rgba(15, 66, 41, .6);
     z-index: 1;
 }
 
@@ -311,6 +313,17 @@ h6,
 .service-item:hover .service-text .btn {
     width: 112px;
 }
+/* expérience  */
+
+#homme-affaire{
+    width: auto;
+    height: 600px;
+}
+
+#img1 ,#img2,#img3,#img4,#img5,#img6{
+    height: 410px;
+    width: auto;
+}
 
 
 /*** Project Portfolio ***/
@@ -446,7 +459,7 @@ h6,
 }
 
 
-/*** Testimonial ***/
+/*** Témoignages ***/
 
 .testimonial-carousel .owl-item img {
     width: 100px;
@@ -517,4 +530,97 @@ h6,
 
 .copyright a:hover {
     color: var(--primary);
+}
+
+/* Signup Page */
+
+ /* Styles pour l'overlay */
+ #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none; 
+}
+/* Styles pour le formulaire d'inscription */
+#signupFormContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    z-index: 1050;
+    display: none; 
+}
+/* Bouton de fermeture */
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+/* boutton connexion header */
+
+.connexion {
+    display: flex;
+    gap: 10px; /* Espacement entre les boutons */
+}
+
+.btn-custom {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-green {
+    background-color: #28a745; 
+}
+
+.btn-blue {
+    background-color: #007bff; /
+}
+
+.btn-custom:hover {
+    opacity: 0.8;
+}
+
+
+/* pannier */
+
+.btn-custom {
+    padding: 0.4rem 1rem;
+    border-radius: 0.3rem;
+    font-weight: 500;
+    margin-left: 0.5rem;
+}
+.btn-green {
+    background-color: #28a745;
+    color: white;
+}
+.btn-green:hover {
+    background-color: #218838;
+    color: white;
+}
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+}
+.btn-blue:hover {
+    background-color: #0069d9;
+    color: white;
 }
