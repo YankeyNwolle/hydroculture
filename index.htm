@@ -79,7 +79,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="index.htm" class="nav-item nav-link">Accueil</a>
-                <a href="produits.htm" class="nav-item nav-link active">Nos Produits</a>
+                <a href="produits.php" class="nav-item nav-link active">Nos Produits</a>
                 <a href="service.htm" class="nav-item nav-link">A propos</a>
                 <a href="reservation.html" class="nav-item nav-link">Reservation</a>
                 <div class="nav-item dropdown">
@@ -105,7 +105,7 @@
             </div>
 
            <div class="connexion">
-                <a href="#" class="btn-custom btn-green">Se connecter</a>
+            <a href="#" class="btn-custom btn-green" id="btnShowLogin">Se connecter</a>
                 <button id="btnShowSignup" class="btn-custom btn-blue">S'inscrire</button>
         </div>
 
@@ -118,34 +118,59 @@
     <!-- formulaire d'inscription -->
 
       <!-- Overlay -->
-      <div id="overlay"></div>
-      <!-- Formulaire d'inscription affiché sur la page -->
-      <section id="signupFormContainer" aria-modal="true" role="dialog" aria-labelledby="signupTitle" tabindex="-1">
-          <button aria-label="Fermer formulaire" class="close-btn" id="btnCloseSignup">&times;</button>
-          <h2 id="signupTitle" class="mb-4 text-center">S'inscrire</h2>
-          <form id="signupForm" novalidate>
-              <div class="mb-3 d-flex gap-3">
-                  <input type="text" class="form-control" placeholder="Prénoms" required />
-                  <input type="text" class="form-control" placeholder="Nom" required />
-              </div>
-              <div class="mb-3">
-                  <input type="tel" class="form-control" placeholder="Téléphone" required />
-              </div>
-              <div class="mb-3">
-                  <input type="email" class="form-control" placeholder="Email" required />
-              </div>
-              <div class="mb-3">
-                  <input type="password" class="form-control" placeholder="Mot de passe" required />
-              </div>
-              <div class="mb-3">
-                  <input type="password" class="form-control" placeholder="Confirme mot de passe" required />
-              </div>
-              <div class="d-flex justify-content-between">
-                  <button type="submit" class="btn btn-success px-4">Soumettre</button>
-                  <button type="button" class="btn btn-secondary px-4" id="btnCancelSignup">Annuler</button>
-              </div>
-          </form>
-      </section>
+    <div id="overlay"></div>
+<!-- Formulaire d'inscription affiché sur la page -->
+<section id="signupFormContainer" aria-modal="true" role="dialog" aria-labelledby="signupTitle" tabindex="-1">
+    <button aria-label="Fermer formulaire" class="close-btn" id="btnCloseSignup">&times;</button>
+    <h2 id="signupTitle" class="mb-4 text-center">S'inscrire</h2>
+    <form id="signupForm" action="inscription.php" method="POST" novalidate>
+        <div class="mb-3 d-flex gap-3">
+            <input type="text" class="form-control" name="prenom" placeholder="Prénoms" required />
+            <input type="text" class="form-control" name="nom" placeholder="Nom" required />
+        </div>
+        <div class="mb-3">
+            <input type="tel" class="form-control" name="telephone" placeholder="Téléphone" required />
+        </div>
+        <div class="mb-3">
+            <input type="email" class="form-control" name="email" placeholder="Email" required />
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="mot_de_passe" placeholder="Mot de passe" required />
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" name="mot_de_passe_confirm" placeholder="Confirme mot de passe" required />
+        </div>
+        <div class="mb-3">
+            <select name="role" required>
+                <option value="" disabled selected>Choisir le type de compte</option>
+                <option value="client">Client</option>
+                <option value="administrateur">Administrateur</option>
+            </select>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success px-4">Soumettre</button>
+            <button type="button" class="btn btn-secondary px-4" id="btnCancelSignup">Annuler</button>
+        </div>
+    </form>
+</section>
+
+      <!-- Formulaire de connexion affiché sur la page -->
+<section id="loginFormContainer" aria-modal="true" role="dialog" aria-labelledby="loginTitle" tabindex="-1" style="display:none;">
+    <button aria-label="Fermer formulaire" class="close-btn" id="btnCloseLogin">&times;</button>
+    <h2 id="loginTitle" class="mb-4 text-center">Se connecter</h2>
+    <form id="loginForm" novalidate>
+        <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Email" required />
+        </div>
+        <div class="mb-3">
+            <input type="password" class="form-control" placeholder="Mot de passe" required />
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success px-4">Connexion</button>
+            <button type="button" class="btn btn-secondary px-4" id="btnCancelLogin">Annuler</button>
+        </div>
+    </form>
+</section>
 
 <!-- création des détails de comment utiliser l'application par l'utilisateur  -->
 
@@ -810,12 +835,32 @@
             btnCancelSignup.addEventListener('click', closeSignupForm);
             overlay.addEventListener('click', closeSignupForm);
             // Gestion simple du submit
-            document.getElementById('signupForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                alert('Inscription réussie (simulation)');
-                closeSignupForm();
-                this.reset();
-            });
+          
+
+            // ...existing JS...
+const btnShowLogin = document.getElementById('btnShowLogin');
+const loginFormContainer = document.getElementById('loginFormContainer');
+const btnCloseLogin = document.getElementById('btnCloseLogin');
+const btnCancelLogin = document.getElementById('btnCancelLogin');
+
+// Fonction pour ouvrir le formulaire de connexion
+function openLoginForm() {
+    loginFormContainer.style.display = 'block';
+    overlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+// Fonction pour fermer le formulaire de connexion
+function closeLoginForm() {
+    loginFormContainer.style.display = 'none';
+    overlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+// Événements pour ouvrir et fermer le formulaire de connexion
+btnShowLogin.addEventListener('click', openLoginForm);
+btnCloseLogin.addEventListener('click', closeLoginForm);
+btnCancelLogin.addEventListener('click', closeLoginForm);
+// Gestion simple du submit
+
         </script>
 </body>
 
